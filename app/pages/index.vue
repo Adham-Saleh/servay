@@ -14,34 +14,34 @@
 
                 //- Name
                 UFormField(label="Name" name="name")
-                    UInput(v-model="state.name" class="w-full")
+                    UInput(v-model="state.name" class="w-full" size="lg")
                 
                 //- Email
                 UFormField(label="Email" name="email")
-                    UInput(v-model="state.email" class="w-full" trailing-icon="i-lucide-at-sign")
+                    UInput(v-model="state.email" class="w-full" trailing-icon="i-lucide-at-sign" size="lg")
                 
                 //- Brand Name
                 UFormField(label="What brand did you buy from ?" name="brandName")
-                    UInput(v-model="state.brandName" class="w-full")
+                    UInput(v-model="state.brandName" class="w-full" size="lg")
 
                 //- Why did you choose to buy from an Egyption brand ?
                 UFormField(label="Why did you choose to buy from an Egyption brand ?" name="whyChooseLocalBrand")
-                    UTextarea(v-model="state.whyChooseLocalBrand" class="w-full")
+                    UTextarea(v-model="state.whyChooseLocalBrand" class="w-full" size="lg")
 
                 //- Describe your experience
                 UFormField(label="Describe your experience" name="describeUX")
-                    UTextarea(v-model="state.describeUX" class="w-full")
+                    UTextarea(v-model="state.describeUX" class="w-full" size="lg")
 
                 //- Question 1
                 UFormField(label="If an Egyption brand offers the same quality of global brand, would you buy ?" name="question1")
-                    URadioGroup(v-model="state.question1" orientation="horizontal" :items="items" class="w-full")
+                    URadioGroup(v-model="state.question1" orientation="horizontal" :items="items" class="w-full" size="lg")
                 
                 //- Question 2
                 UFormField(label="If an Egyption brand offers the same quality of global brand with slightly higher price, would you buy ?" name="question2")
-                    URadioGroup(v-model="state.question2" orientation="horizontal" :items="items" class="w-full")
+                    URadioGroup(v-model="state.question2" orientation="horizontal" :items="items" class="w-full" size="lg")
                 
                 //- Submit Button
-                UButton(type="submit" class="w-full flex items-center justify-center cursor-pointer" :disabled="progress < 100") Submit
+                UButton(type="submit" class="w-full flex items-center justify-center cursor-pointer" :disabled="progress < 100" size="lg") Submit
 </template>
 
 <script setup lang="ts">

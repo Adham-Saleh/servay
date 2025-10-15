@@ -2,6 +2,7 @@
 import type { NavigationMenuItem } from "@nuxt/ui";
 
 const route = useRoute();
+const colorMode = useColorMode();
 const user = useState<null | string>("user", () => "Updating...");
 
 const items = computed<NavigationMenuItem[]>(() => [
@@ -44,7 +45,12 @@ const items = computed<NavigationMenuItem[]>(() => [
     </template>
 
     <template #right>
-      <UColorModeButton />
+      <ClientOnly v-if="!colorMode?.forced">
+        <UColorModeButton class="cursor-pointer" />
+        <template #fallback>
+          <div class="size-8" />
+        </template>
+      </ClientOnly>
 
       <!-- <UTooltip text="Open on GitHub" :kbds="['meta', 'G']">
         <UButton
