@@ -3,36 +3,11 @@ import type { NavigationMenuItem } from "@nuxt/ui";
 
 const route = useRoute();
 const colorMode = useColorMode();
-const user = useState<null | string>("user", () => "Updating...");
-
-const items = computed<NavigationMenuItem[]>(() => [
-  {
-    label: "Docs",
-    to: "/docs/getting-started",
-    active: route.path.startsWith("/docs/getting-started"),
-  },
-  {
-    label: "Components",
-    to: "/docs/components",
-    active: route.path.startsWith("/docs/components"),
-  },
-  {
-    label: "Figma",
-    to: "https://go.nuxt.com/figma-ui",
-    target: "_blank",
-  },
-  {
-    label: "Releases",
-    to: "https://github.com/nuxt/ui/releases",
-    target: "_blank",
-  },
-]);
+const user = useState<string>("user", () => "Updating...");
 </script>
 
 <template>
   <UHeader :toggle="false" title="">
-    <!-- <UNavigationMenu :items="items" /> -->
-
     <template #left>
       <UUser
         :name="user"
@@ -51,17 +26,6 @@ const items = computed<NavigationMenuItem[]>(() => [
           <div class="size-8" />
         </template>
       </ClientOnly>
-
-      <!-- <UTooltip text="Open on GitHub" :kbds="['meta', 'G']">
-        <UButton
-          color="neutral"
-          variant="ghost"
-          to="https://github.com/nuxt/ui"
-          target="_blank"
-          icon="i-simple-icons-github"
-          aria-label="GitHub"
-        />
-      </UTooltip> -->
     </template>
   </UHeader>
 </template>

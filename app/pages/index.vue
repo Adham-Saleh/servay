@@ -48,7 +48,7 @@
 import * as yup from "yup";
 
 const items = ref(["Yes", "No"]);
-const user = useState<null | string>("user", () => "Updating...");
+const user = useState<string>("user", () => "Updating...");
 
 const state = reactive({
   name: "",
