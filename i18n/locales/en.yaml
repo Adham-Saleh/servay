@@ -1,0 +1,28 @@
+welcome: Welcome
+
+name: Name
+email: Email
+haveYouEverBoughtSomethingFromAnEgyptionBrandd: Have you ever bought something from an Egyption brand ?
+whatBrandDidYouBuyFrom: What brand did you buy from ?
+whyDidYouChooseToBuyFromAnEgyptionBrand: Why did you choose to buy from an Egyption brand ?
+describeYourExperience: Describe your experience
+whatIsTheMainReasonWhichPreventedYouFromBuyingFromAnEgyptionBrand: What is the main reason which prevented you from buying from an Egyption brand ?
+whatWouldMakeYouBuyFromAnEgyptionBrand: What would make you buy from an Egyption brand ?
+ifAnEgyptionBrandOffersTheSameQualityOfGlobalBrandWouldYouBuy: If an Egyption brand offers the same quality of global brand, would you buy ?
+ifAnEgyptionBrandOffersTheSameQualityOfGlobalBrandWithSlightlyHigherPriceWouldYouBuy: If an Egyption brand offers the same quality of global brand with slightly higher price, would you buy ?
+submit: Submit
+yes: Yes
+no: No
+updating: Updating...
+thanksForYourHelp: Thanks for your help
+
+congrats: Congrats!
+Thanks: Thanks
+forSharingYourValuableFeedbackWithUsWeAppreciateYourTimeAndEffortInHelpingUsImproveOurCountryMarketAndThoughts: for sharing your valuable feedback with us. We appreciate your time and effort in helping us improve our country, market and thoughts.
+
+# Validation
+nameIsRequired: Name is required
+invalidEmail: Invalid email
+emailIsRequired: Email is required
+thisFieldIsRequired: This field is required
+brandNameIsRequired: Brand name is required

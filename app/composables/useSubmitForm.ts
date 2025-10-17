@@ -9,9 +9,14 @@ export const useSubmitForm = function () {
       method: "POST",
       body: formData,
     });
-    console.log("data", data);
-    console.log("error", error);
     loading.value = false;
+    if (error.value)
+      return {
+        data,
+        message: error?.value?.data?.message || "Something went wrong",
+        success: false,
+      };
+    return { data, message: "Form submitted successfully", success: true };
   };
 
   return { submitForm, loading };

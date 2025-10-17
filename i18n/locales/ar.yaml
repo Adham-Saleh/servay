@@ -1,0 +1,28 @@
+welcome: اهلا
+
+name: اسمك
+email: ايميلك (البريد الالكتروني)
+haveYouEverBoughtSomethingFromAnEgyptionBrandd: اشتريت قبل كدا من براند مصري ؟
+whatBrandDidYouBuyFrom: ايه اسم البراند الي انت اشتريت منه ؟
+whyDidYouChooseToBuyFromAnEgyptionBrand: اشمعنا اخترت تشتري من براند مصري ؟
+describeYourExperience: اوصفلنا تجربتك
+whatIsTheMainReasonWhichPreventedYouFromBuyingFromAnEgyptionBrand: ايه هو السبب الرئيسي الي منعك تشتري من براند مصري ؟
+whatWouldMakeYouBuyFromAnEgyptionBrand: ايه الحاجه الي ممكن تشجعك تشتري من براند مصري ؟
+ifAnEgyptionBrandOffersTheSameQualityOfGlobalBrandWouldYouBuy: لو البراند المصري بيوفر نفس الجوده بتاعت براند اجنبي و هل ممكن تشتري ؟
+ifAnEgyptionBrandOffersTheSameQualityOfGlobalBrandWithSlightlyHigherPriceWouldYouBuy: لو البراند المصري سعرو اكتر حاجه بسيطه من البراند الاجنبي و هل ممكن تشتري ؟
+submit: ارسال
+yes: اه
+no: لا
+updating: جاري التحديث...
+thanksForYourHelp: شكرا لمساعدتك
+
+congrats: مبروك
+thanks: شكراً
+forSharingYourValuableFeedbackWithUsWeAppreciateYourTimeAndEffortInHelpingUsImproveOurCountryMarketAndThoughts: على مشاركتك القيمة معانا، بنقدّر وقتك ومجهودك في مساعدتنا نطوّر بلدنا وسوقنا وطريقتنا في التفكير
+
+# Validation
+nameIsRequired: الاسم مطلوب
+invalidEmail: ايميل غير صالح
+emailIsRequired: الايميل مطلوب
+thisFieldIsRequired: هذا الحقل مطلوب
+brandNameIsRequired: اسم البراند مطلوب

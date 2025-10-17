@@ -1,82 +1,90 @@
 <template lang="pug">
     UContainer(class="py-[24px] lg:py-[40px]")
-
-        
-
+    
         .flex.items-center.justify-center
 
             //- Form
             UForm(class="space-y-4 w-full lg:w-[350px]" :schema="schema" :state="state" @submit="onSubmit" :loading)
-                h1.text-lg Welcome! {{ state.name }}
-                p Fill up the form
+                h1 {{ t('welcome') }}! {{ state.name }}
+
                 //- Progress
                 UProgress(v-model="progress")
 
                 //- Name
-                UFormField(label="Name" name="name")
+                UFormField(:label="t('name')" name="name")
                     UInput(v-model="state.name" class="w-full" size="lg")
                 
                 //- Email
-                UFormField(label="Email" name="email")
+                UFormField(:label="t('email')" name="email")
                     UInput(v-model="state.email" class="w-full" trailing-icon="i-lucide-at-sign" size="lg")
                 
-                UFormField(label="Have you ever bought something from an Egyption brand ?" name="boughtFromEgyptionBrand")
-                    URadioGroup(v-model="state.boughtFromEgyptionBrand" orientation="horizontal" :items="items" class="w-full" size="lg")
+                UFormField(:label="t('haveYouEverBoughtSomethingFromAnEgyptionBrandd')" name="HasBoughtFromEgyptianBrand")
+                    URadioGroup(v-model="state.HasBoughtFromEgyptianBrand" value-key="value" orientation="horizontal" :items="items" class="w-full" size="lg")
                 
                 //- If a user has bought from an Egyption brand
-                div(v-if="state.boughtFromEgyptionBrand === 'Yes'" class="space-y-4")
+                div(v-if="state.HasBoughtFromEgyptianBrand" class="space-y-4")
 
                   //- Brand Name
-                  UFormField(label="What brand did you buy from ?" name="brandName")
+                  UFormField(:label="t('whatBrandDidYouBuyFrom')" name="brandName")
                       UInput(v-model="state.brandName" class="w-full" size="lg")
 
                   //- Why did you choose to buy from an Egyption brand ?
-                  UFormField(label="Why did you choose to buy from an Egyption brand ?" name="reasonForChoice")
+                  UFormField(:label="t('whyDidYouChooseToBuyFromAnEgyptionBrand')" name="reasonForChoice")
                       UTextarea(v-model="state.reasonForChoice" class="w-full" size="lg")
 
                   //- Describe your experience
-                  UFormField(label="Describe your experience" name="experienceDescription")
+                  UFormField(:label="t('describeYourExperience')" name="experienceDescription")
                       UTextarea(v-model="state.experienceDescription" class="w-full" size="lg")
                 
                 //- If a user has not bought from an Egyption brand
                 div(v-else class="space-y-4") 
 
                   //- What prevented you
-                  UFormField(label="What is the main reason which prevented you from buying from an Egyption brand?" name="whatPreventedYou")
-                      UTextarea(v-model="state.whatPreventedYou" class="w-full" size="lg")
+                  UFormField(:label="t('whatIsTheMainReasonWhichPreventedYouFromBuyingFromAnEgyptionBrand')" name="reasonForNotBuying")
+                      UTextarea(v-model="state.reasonForNotBuying" class="w-full" size="lg")
                   
                   //- What would make you buy 
-                  UFormField(label="What would make you buy from an Egyption brand ?" name="whyWouldYouBuy")
-                      UTextarea(v-model="state.whyWouldYouBuy" class="w-full" size="lg")
+                  UFormField(:label="t('whatWouldMakeYouBuyFromAnEgyptionBrand')" name="whatWouldMakeYouBuy")
+                      UTextarea(v-model="state.whatWouldMakeYouBuy" class="w-full" size="lg")
                 
                 //- Question 1
-                UFormField(label="If an Egyption brand offers the same quality of global brand, would you buy ?" name="wouldBuySameQuality")
-                    URadioGroup(v-model="state.wouldBuySameQuality" orientation="horizontal" :items="items" class="w-full" size="lg")
+                UFormField(:label="t('ifAnEgyptionBrandOffersTheSameQualityOfGlobalBrandWouldYouBuy')" name="wouldBuySameQuality")
+                    URadioGroup(v-model="state.wouldBuySameQuality" value-key="value" orientation="horizontal" :items="items" class="w-full" size="lg")
                   
                 //- Question 2
-                UFormField(label="If an Egyption brand offers the same quality of global brand with slightly higher price, would you buy ?" name="wouldBuyHigherPrice")
-                    URadioGroup(v-model="state.wouldBuyHigherPrice" orientation="horizontal" :items="items" class="w-full" size="lg")
+                UFormField(:label="t('ifAnEgyptionBrandOffersTheSameQualityOfGlobalBrandWithSlightlyHigherPriceWouldYouBuy')" name="wouldBuyHigherPrice")
+                    URadioGroup(v-model="state.wouldBuyHigherPrice" value-key="value" orientation="horizontal" :items="items" class="w-full" size="lg")
                 
                 //- Submit Button
-                UButton(type="submit" class="w-full flex items-center justify-center cursor-pointer" :disabled="(progress < 100) || loading" size="lg") Submit
+                UButton(type="submit" class="w-full flex items-center justify-center cursor-pointer" :disabled="(progress < 100) || loading" :loading size="lg") {{ t('submit') }}
+    
+    SuccessModal(v-model="successModal" @closed="handleResetForm")
+
 </template>
 
 <script setup lang="ts">
 import * as yup from "yup";
+import type { RadioGroupItem } from "@nuxt/ui";
 
-const items = ref(["Yes", "No"]);
-const user = useState<string>("user", () => "Updating...");
+const { t, locale } = useI18n();
+const items = ref<RadioGroupItem[]>([
+  { label: t("yes"), value: true },
+  { label: t("no"), value: false },
+]);
+const user = useState<string>("user", () => "---");
+const toast = useToast();
+const successModal = ref<boolean>(false);
 const { submitForm, loading } = useSubmitForm();
 
 const state = reactive({
   name: "",
   email: "",
-  boughtFromEgyptionBrand: "Yes",
+  HasBoughtFromEgyptianBrand: true,
   brandName: "",
   reasonForChoice: "",
   experienceDescription: "",
-  whatPreventedYou: "",
-  whyWouldYouBuy: "",
+  reasonForNotBuying: "",
+  whatWouldMakeYouBuy: "",
   wouldBuySameQuality: "",
   wouldBuyHigherPrice: "",
 });
@@ -87,9 +95,9 @@ const visibleFields = computed(() => {
     email: state.email,
     wouldBuySameQuality: state.wouldBuySameQuality,
     wouldBuyHigherPrice: state.wouldBuyHigherPrice,
-    boughtFromEgyptionBrand: state.boughtFromEgyptionBrand,
+    HasBoughtFromEgyptianBrand: state.HasBoughtFromEgyptianBrand,
   };
-  if (state.boughtFromEgyptionBrand === "Yes") {
+  if (state.HasBoughtFromEgyptianBrand) {
     return {
       ...base,
       brandName: state.brandName,
@@ -99,68 +107,86 @@ const visibleFields = computed(() => {
   } else {
     return {
       ...base,
-      whatPreventedYou: state.whatPreventedYou,
-      whyWouldYouBuy: state.whyWouldYouBuy,
+      reasonForNotBuying: state.reasonForNotBuying,
+      whatWouldMakeYouBuy: state.whatWouldMakeYouBuy,
     };
   }
 });
 
 const progress = computed(() => {
   return (
-    (Object.values(visibleFields.value).filter((v) => v).length /
+    (Object.values(visibleFields.value).filter((v) => v || v === false).length /
       Object.values(visibleFields.value).length) *
     100
   );
 });
 
 const schema = yup.object({
-  name: yup.string().required("Name is required"),
-  email: yup.string().email("Invalid email").required("Email is required"),
-  boughtFromEgyptionBrand: yup
-    .string()
-    .oneOf(["Yes", "No"])
-    .required("Please select Yes or No"),
-  brandName: yup.string().when("boughtFromEgyptionBrand", {
-    is: "Yes",
-    then: (schema) => schema.required("Brand name is required"),
+  name: yup.string().required(t("nameIsRequired")),
+  email: yup.string().email(t("invalidEmail")).required(t("emailIsRequired")),
+  HasBoughtFromEgyptianBrand: yup.boolean().required(t("thisFieldIsRequired")),
+  brandName: yup.string().when("HasBoughtFromEgyptianBrand", {
+    is: true,
+    then: (schema) => schema.required(t("brandNameIsRequired")),
   }),
-  reasonForChoice: yup.string().when("boughtFromEgyptionBrand", {
-    is: "Yes",
-    then: (schema) => schema.required("This field is required"),
+  reasonForChoice: yup.string().when("HasBoughtFromEgyptianBrand", {
+    is: true,
+    then: (schema) => schema.required(t("thisFieldIsRequired")),
   }),
-  experienceDescription: yup.string().when("boughtFromEgyptionBrand", {
-    is: "Yes",
-    then: (schema) => schema.required("This field is required"),
+  experienceDescription: yup.string().when("HasBoughtFromEgyptianBrand", {
+    is: true,
+    then: (schema) => schema.required(t("thisFieldIsRequired")),
   }),
-  whatPreventedYou: yup.string().when("boughtFromEgyptionBrand", {
-    is: "No",
-    then: (schema) => schema.required("This field is required"),
+  reasonForNotBuying: yup.string().when("HasBoughtFromEgyptianBrand", {
+    is: false,
+    then: (schema) => schema.required(t("thisFieldIsRequired")),
   }),
-  whyWouldYouBuy: yup.string().when("boughtFromEgyptionBrand", {
-    is: "No",
-    then: (schema) => schema.required("This field is required"),
+  whatWouldMakeYouBuy: yup.string().when("HasBoughtFromEgyptianBrand", {
+    is: false,
+    then: (schema) => schema.required(t("thisFieldIsRequired")),
   }),
-  wouldBuySameQuality: yup
-    .string()
-    .oneOf(items.value, "Please select an option")
-    .required("This field is required"),
-  wouldBuyHigherPrice: yup
-    .string()
-    .oneOf(items.value, "Please select an option")
-    .required("This field is required"),
+  wouldBuySameQuality: yup.boolean().required(t("thisFieldIsRequired")),
+  wouldBuyHigherPrice: yup.boolean().required(t("thisFieldIsRequired")),
 });
 
 const onSubmit = async function (e: SubmitEvent) {
   const { data } = e as SubmitEvent & { data: typeof state };
-  console.log("data -->", data);
-  await submitForm(data);
-  alert(JSON.stringify(toRaw(data), null, 2));
-  //   TODO: Handle form submission (e.g., send data to a server)
+  const input = {
+    ...data,
+    ...(data?.HasBoughtFromEgyptianBrand
+      ? { whatWouldMakeYouBuy: undefined, reasonForNotBuying: undefined }
+      : {
+          brandName: undefined,
+          experienceDescription: undefined,
+          reasonForChoice: undefined,
+        }),
+  };
+  const { message, success } = await submitForm(input);
+  if (!success)
+    return toast.add({
+      title: message,
+      color: "error",
+      id: "modal-error",
+    });
+  successModal.value = true;
+};
+
+const handleResetForm = function () {
+  state.name = "";
+  state.email = "";
+  state.HasBoughtFromEgyptianBrand = true;
+  state.brandName = "";
+  state.reasonForChoice = "";
+  state.experienceDescription = "";
+  state.reasonForNotBuying = "";
+  state.whatWouldMakeYouBuy = "";
+  state.wouldBuySameQuality = "";
+  state.wouldBuyHigherPrice = "";
 };
 
 watch(state, () => {
   if (state.name === user.value) return;
-  if (state.name === "") return (user.value = "Updating...");
+  if (state.name === "") return (user.value = "---");
   user.value = state.name;
 });
 </script>

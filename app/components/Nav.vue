@@ -1,9 +1,24 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui";
+import { ar, en } from "@nuxt/ui/locale";
 
+const { t } = useI18n();
 const route = useRoute();
 const colorMode = useColorMode();
-const user = useState<string>("user", () => "Updating...");
+const user = useState<string>("user");
+
+const { locale, setLocale } = useI18n();
+
+const handleSwitch = function () {
+  locale.value === "en" ? setLocale("ar") : setLocale("en");
+};
+
+useHead(() => ({
+  htmlAttrs: {
+    lang: locale.value,
+    dir: locale.value === "ar" ? "rtl" : "ltr",
+  },
+}));
 </script>
 
 <template>
@@ -11,7 +26,7 @@ const user = useState<string>("user", () => "Updating...");
     <template #left>
       <UUser
         :name="user"
-        description="Thanks for your help"
+        :description="t('thanksForYourHelp')"
         :avatar="{
           src: 'https://i.pravatar.cc/150?u=john-doe',
           icon: 'i-lucide-image',
@@ -20,6 +35,9 @@ const user = useState<string>("user", () => "Updating...");
     </template>
 
     <template #right>
+      <UButton variant="ghost" @click="handleSwitch">{{
+        locale === "en" ? "AR" : "EN"
+      }}</UButton>
       <ClientOnly v-if="!colorMode?.forced">
         <UColorModeButton class="cursor-pointer" />
         <template #fallback>
