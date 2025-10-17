@@ -11,7 +11,7 @@ const user = useState<string>("user", () => "Updating...");
     <template #left>
       <UUser
         :name="user"
-        description="Thank for your help"
+        description="Thanks for your help"
         :avatar="{
           src: 'https://i.pravatar.cc/150?u=john-doe',
           icon: 'i-lucide-image',
