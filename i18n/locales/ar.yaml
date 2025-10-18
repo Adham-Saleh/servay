@@ -26,3 +26,7 @@ invalidEmail: ايميل غير صالح
 emailIsRequired: الايميل مطلوب
 thisFieldIsRequired: هذا الحقل مطلوب
 brandNameIsRequired: اسم البراند مطلوب
+
+# Seo
+seoTitle: شاركنا رأيك وساعدنا نطور الصناعة المصرية
+seoDescription: رأيك بيفرق! خلينا نعرف إيه اللي يخليك تختار البراندات المصرية وتدعمها.

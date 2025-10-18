@@ -26,3 +26,7 @@ invalidEmail: Invalid email
 emailIsRequired: Email is required
 thisFieldIsRequired: This field is required
 brandNameIsRequired: Brand name is required
+
+# Seo
+seoTitle: Share your opinion and help us improve the Egyptian industry
+seoDescription: Your opinion matters! Let us know what makes you choose and support Egyptian brands.

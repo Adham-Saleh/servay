@@ -7,6 +7,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.API_BASE_URL,
+      appBaseUrl:
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:3000" // your local API
+          : "https://graduationprojectservay.netlify.app", // your production domain
     },
   },
   i18n: {
