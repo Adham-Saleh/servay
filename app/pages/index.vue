@@ -122,13 +122,20 @@ const progress = computed(() => {
 });
 
 const schema = yup.object({
-  name: yup.string().required(t("nameIsRequired")),
-  email: yup.string().email(t("invalidEmail")).required(t("emailIsRequired")),
+  name: yup.string().trim().required(t("nameIsRequired")),
+  email: yup
+    .string()
+    .trim()
+    .email(t("invalidEmail"))
+    .required(t("emailIsRequired")),
   HasBoughtFromEgyptianBrand: yup.boolean().required(t("thisFieldIsRequired")),
-  brandName: yup.string().when("HasBoughtFromEgyptianBrand", {
-    is: true,
-    then: (schema) => schema.required(t("brandNameIsRequired")),
-  }),
+  brandName: yup
+    .string()
+    .trim()
+    .when("HasBoughtFromEgyptianBrand", {
+      is: true,
+      then: (schema) => schema.required(t("brandNameIsRequired")),
+    }),
   reasonForChoice: yup.string().when("HasBoughtFromEgyptianBrand", {
     is: true,
     then: (schema) => schema.required(t("thisFieldIsRequired")),
