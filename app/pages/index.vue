@@ -16,7 +16,7 @@
                 
                 //- Email
                 UFormField(:label="t('email')" name="email")
-                    UInput(v-model="state.email" class="w-full" trailing-icon="i-lucide-at-sign" size="lg")
+                    UInput(v-model="state.email" type="email" class="w-full" trailing-icon="i-lucide-at-sign" size="lg")
                 
                 UFormField(:label="t('haveYouEverBoughtSomethingFromAnEgyptionBrandd')" name="HasBoughtFromEgyptianBrand")
                     URadioGroup(v-model="state.HasBoughtFromEgyptianBrand" value-key="value" orientation="horizontal" :items="items" class="w-full" size="lg")

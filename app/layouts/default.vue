@@ -10,8 +10,8 @@ const { t } = useI18n();
 const config = useRuntimeConfig();
 
 useSeoMeta({
-  title: t("seoTitle"),
-  description: t("seoDescription"),
+  title: computed(() => t("seoTitle")),
+  description: computed(() => t("seoDescription")),
   ogImage: config.public.appBaseUrl + "/share.png",
 });
 </script>
